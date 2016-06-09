@@ -1,5 +1,16 @@
 # Camel Spring Boot Example
 
+
+
+
+###CONFIG MAP
+
+
+oc create configmap demo --from-file=service.properties
+oc edit configmap demo
+oc describe configmap demo
+
+oc rsh $(oc get pods -l component=fis-camel-spring-boot-demo --template '{{range .items}}{{.metadata.name}}{{end}}') cat /etc/config/service.properties
 This quickstart run Apache Camel in a standalone Java Spring Boot container.
 It is based on Fuse 6.2 hence Camel 2.15.1 and corresponding Spring version.
 
@@ -22,3 +33,5 @@ The example can be built and deployed using a single goal:
 The example can also be built and run using the included S2I template quickstart-template.json.
 
     oc new-app -f quickstart-template.json
+
+
