@@ -1,11 +1,6 @@
-# Camel Spring Boot Example
-
-
-
+# Camel Spring Boot Config Map Example
 
 ###CONFIG MAP
-
-
 oc create configmap demo --from-file=service.properties
 oc edit configmap demo
 oc describe configmap demo
@@ -13,6 +8,9 @@ oc describe configmap demo
 oc rsh $(oc get pods -l component=fis-camel-spring-boot-demo --template '{{range .items}}{{.metadata.name}}{{end}}') cat /etc/config/service.properties
 This quickstart run Apache Camel in a standalone Java Spring Boot container.
 It is based on Fuse 6.2 hence Camel 2.15.1 and corresponding Spring version.
+
+
+
 
 ### Option 1: Building (with hawt-app-maven-plugin) and running locally
 
