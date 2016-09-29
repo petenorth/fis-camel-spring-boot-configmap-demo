@@ -19,7 +19,7 @@
     {
       "name": "GIT_REPO",
       "required": true,
-      "value": "master",
+      "value": "https://github.com/petenorth/fis-camel-spring-boot-configmap-demo",
       "description": "Git repository, required"
     },
     {
@@ -176,6 +176,7 @@
               "namespace": "${IMAGE_STREAM_NAMESPACE}",
               "name": "fis-java-openshift:${BUILDER_VERSION}"
             },
+            "incremental": true,
             "forcePull": true,
             "env": [
               {
@@ -292,7 +293,27 @@
                     "protocol": "TCP"
                   }
                 ],
+                "volumeMounts": [
+                  {
+                    "name": "app-config",
+                    "mountPath": "/etc/config"
+                  }
+                ],
                 "resources": {}
+              }
+            ],
+            "volumes": [
+                {
+                  "name": "app-config",
+                  "configMap": {
+                  "name": "demo",
+                  "items": [
+                      {
+                         "key": "service.properties",
+                         "path": "service.properties"
+                      }
+                  ]
+                }
               }
             ]
           }
